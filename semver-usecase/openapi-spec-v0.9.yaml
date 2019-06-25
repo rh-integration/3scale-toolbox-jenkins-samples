@@ -1,0 +1,23 @@
+---
+swagger: '2.0'
+info:
+  title: Red Hat Event
+  description: Red Hat Event API - An API that gives information about the Red Hat Event
+  version: 0.9.0
+paths:
+  /location:
+    get:
+      summary: Get Location
+      description: Get the location of the next RedHat Event
+      operationId: GetLocation
+      responses:
+        200:
+          description: OK
+  /timeframe:
+    get:
+      summary: Get Timeframe
+      description: Get the timeframe of the next RedHat Event
+      operationId: GetTimeframe
+      responses:
+        200:
+          description: OK

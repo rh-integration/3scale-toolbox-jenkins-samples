@@ -1,0 +1,162 @@
+apiVersion: v1
+kind: Template
+metadata:
+  name: semver-usecase
+objects:
+- kind: "BuildConfig"
+  apiVersion: "v1"
+  metadata:
+    name: "semver-usecase-v0.9"
+    namespace: ${NAMESPACE}
+  spec:
+    source:
+      git:
+        uri: ${GIT_REPO}
+    strategy:
+      type: "JenkinsPipeline"
+      jenkinsPipelineStrategy:
+        jenkinsfilePath: semver-usecase/Jenkinsfile
+        env:
+          - name: SECRET_NAME
+            value: ${SECRET_NAME}
+          - name: NAMESPACE
+            value: ${NAMESPACE}
+          - name: TARGET_INSTANCE
+            value: ${TARGET_INSTANCE}
+          - name: PUBLIC_STAGING_WILDCARD_DOMAIN
+            value: ${PUBLIC_STAGING_WILDCARD_DOMAIN}
+          - name: PUBLIC_PRODUCTION_WILDCARD_DOMAIN
+            value: ${PUBLIC_PRODUCTION_WILDCARD_DOMAIN}
+          - name: DEVELOPER_ACCOUNT_ID
+            value: ${DEVELOPER_ACCOUNT_ID}
+          - name: PRIVATE_BASE_URL
+            value: ${PRIVATE_BASE_URL}
+          - name: OIDC_ISSUER_ENDPOINT
+            value: ${OIDC_ISSUER_ENDPOINT}
+          - name: DISABLE_TLS_VALIDATION
+            value: ${DISABLE_TLS_VALIDATION}
+          - name: OPENAPI_SPECIFICATION_FILE
+            value: openapi-spec-v0.9.yaml
+- kind: "BuildConfig"
+  apiVersion: "v1"
+  metadata:
+    name: "semver-usecase-v1.0"
+    namespace: ${NAMESPACE}
+  spec:
+    source:
+      git:
+        uri: ${GIT_REPO}
+    strategy:
+      type: "JenkinsPipeline"
+      jenkinsPipelineStrategy:
+        jenkinsfilePath: semver-usecase/Jenkinsfile
+        env:
+          - name: SECRET_NAME
+            value: ${SECRET_NAME}
+          - name: NAMESPACE
+            value: ${NAMESPACE}
+          - name: TARGET_INSTANCE
+            value: ${TARGET_INSTANCE}
+          - name: PUBLIC_STAGING_WILDCARD_DOMAIN
+            value: ${PUBLIC_STAGING_WILDCARD_DOMAIN}
+          - name: PUBLIC_PRODUCTION_WILDCARD_DOMAIN
+            value: ${PUBLIC_PRODUCTION_WILDCARD_DOMAIN}
+          - name: DEVELOPER_ACCOUNT_ID
+            value: ${DEVELOPER_ACCOUNT_ID}
+          - name: PRIVATE_BASE_URL
+            value: ${PRIVATE_BASE_URL}
+          - name: OIDC_ISSUER_ENDPOINT
+            value: ${OIDC_ISSUER_ENDPOINT}
+          - name: DISABLE_TLS_VALIDATION
+            value: ${DISABLE_TLS_VALIDATION}
+          - name: OPENAPI_SPECIFICATION_FILE
+            value: openapi-spec-v1.0.yaml
+- kind: "BuildConfig"
+  apiVersion: "v1"
+  metadata:
+    name: "semver-usecase-v1.1"
+    namespace: ${NAMESPACE}
+  spec:
+    source:
+      git:
+        uri: ${GIT_REPO}
+    strategy:
+      type: "JenkinsPipeline"
+      jenkinsPipelineStrategy:
+        jenkinsfilePath: semver-usecase/Jenkinsfile
+        env:
+          - name: SECRET_NAME
+            value: ${SECRET_NAME}
+          - name: NAMESPACE
+            value: ${NAMESPACE}
+          - name: TARGET_INSTANCE
+            value: ${TARGET_INSTANCE}
+          - name: PUBLIC_STAGING_WILDCARD_DOMAIN
+            value: ${PUBLIC_STAGING_WILDCARD_DOMAIN}
+          - name: PUBLIC_PRODUCTION_WILDCARD_DOMAIN
+            value: ${PUBLIC_PRODUCTION_WILDCARD_DOMAIN}
+          - name: DEVELOPER_ACCOUNT_ID
+            value: ${DEVELOPER_ACCOUNT_ID}
+          - name: PRIVATE_BASE_URL
+            value: ${PRIVATE_BASE_URL}
+          - name: OIDC_ISSUER_ENDPOINT
+            value: ${OIDC_ISSUER_ENDPOINT}
+          - name: DISABLE_TLS_VALIDATION
+            value: ${DISABLE_TLS_VALIDATION}
+          - name: OPENAPI_SPECIFICATION_FILE
+            value: openapi-spec-v1.1.yaml
+- kind: "BuildConfig"
+  apiVersion: "v1"
+  metadata:
+    name: "semver-usecase-v2.0"
+    namespace: ${NAMESPACE}
+  spec:
+    source:
+      git:
+        uri: ${GIT_REPO}
+    strategy:
+      type: "JenkinsPipeline"
+      jenkinsPipelineStrategy:
+        jenkinsfilePath: semver-usecase/Jenkinsfile
+        env:
+          - name: SECRET_NAME
+            value: ${SECRET_NAME}
+          - name: NAMESPACE
+            value: ${NAMESPACE}
+          - name: TARGET_INSTANCE
+            value: ${TARGET_INSTANCE}
+          - name: PUBLIC_STAGING_WILDCARD_DOMAIN
+            value: ${PUBLIC_STAGING_WILDCARD_DOMAIN}
+          - name: PUBLIC_PRODUCTION_WILDCARD_DOMAIN
+            value: ${PUBLIC_PRODUCTION_WILDCARD_DOMAIN}
+          - name: DEVELOPER_ACCOUNT_ID
+            value: ${DEVELOPER_ACCOUNT_ID}
+          - name: PRIVATE_BASE_URL
+            value: ${PRIVATE_BASE_URL}
+          - name: OIDC_ISSUER_ENDPOINT
+            value: ${OIDC_ISSUER_ENDPOINT}
+          - name: DISABLE_TLS_VALIDATION
+            value: ${DISABLE_TLS_VALIDATION}
+          - name: OPENAPI_SPECIFICATION_FILE
+            value: openapi-spec-v2.0.yaml
+parameters:
+- name: SECRET_NAME
+  value: 3scale-toolbox
+- name: NAMESPACE
+  value: api-lifecycle
+- name: TARGET_INSTANCE
+  value: 3scale-saas
+- name: GIT_REPO
+  value: https://github.com/rh-integration/3scale-toolbox-jenkins-samples.git
+- name: PUBLIC_STAGING_WILDCARD_DOMAIN
+  required: false
+- name: PUBLIC_PRODUCTION_WILDCARD_DOMAIN
+  required: false
+- name: DEVELOPER_ACCOUNT_ID
+  required: true
+- name: PRIVATE_BASE_URL
+  required: true
+- name: DISABLE_TLS_VALIDATION
+  value: "no"
+- name: OIDC_ISSUER_ENDPOINT
+  required: true
