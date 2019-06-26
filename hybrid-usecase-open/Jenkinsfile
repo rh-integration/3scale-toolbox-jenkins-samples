@@ -36,7 +36,7 @@ node() {
         ]
     )
 
-    echo "toolbox version = " + service.toolbox.getToolboxVersion()
+    //echo "toolbox version = " + service.toolbox.getToolboxVersion()
   }
 
   stage("Import OpenAPI") {
