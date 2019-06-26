@@ -50,8 +50,8 @@ export ONPREM_ADMIN_PORTAL_HOSTNAME="$(oc get route system-provider-admin -o jso
 
 ```sh
 export OPENSHIFT_ROUTER_SUFFIX=app.openshift.test # Replace me !
-export APICAST_ONPREM_STAGING_WILDCARD_DOMAIN=wildcard.onprem-staging.$OPENSHIFT_ROUTER_SUFFIX
-export APICAST_ONPREM_PRODUCTION_WILDCARD_DOMAIN=wildcard.onprem-production.$OPENSHIFT_ROUTER_SUFFIX
+export APICAST_ONPREM_STAGING_WILDCARD_DOMAIN=onprem-staging.$OPENSHIFT_ROUTER_SUFFIX
+export APICAST_ONPREM_PRODUCTION_WILDCARD_DOMAIN=onprem-production.$OPENSHIFT_ROUTER_SUFFIX
 ```
 
 **Note:** You will have to set the value of the `OPENSHIFT_ROUTER_SUFFIX` variable to the suffix of your OpenShift Router (usually something such as `app.openshift.test`).
@@ -59,8 +59,8 @@ export APICAST_ONPREM_PRODUCTION_WILDCARD_DOMAIN=wildcard.onprem-production.$OPE
 - Add the wildcard routes to your existing 3scale on-prem instance
 
 ```sh
-oc create route edge apicast-wildcard-staging --service=apicast-staging --hostname="$APICAST_ONPREM_STAGING_WILDCARD_DOMAIN" --insecure-policy=Allow --wildcard-policy=Subdomain
-oc create route edge apicast-wildcard-production --service=apicast-production --hostname="$APICAST_ONPREM_PRODUCTION_WILDCARD_DOMAIN" --insecure-policy=Allow --wildcard-policy=Subdomain
+oc create route edge apicast-wildcard-staging --service=apicast-staging --hostname="wildcard.$APICAST_ONPREM_STAGING_WILDCARD_DOMAIN" --insecure-policy=Allow --wildcard-policy=Subdomain
+oc create route edge apicast-wildcard-production --service=apicast-production --hostname="wildcard.$APICAST_ONPREM_PRODUCTION_WILDCARD_DOMAIN" --insecure-policy=Allow --wildcard-policy=Subdomain
 ```
 
 - Navigate to **Audience** > **Accounts** > **Listing**
@@ -168,8 +168,8 @@ export EVENT_API_HOSTNAME="$(oc get route -n "$TOOLBOX_NAMESPACE" event-api -o j
 - Define your wildcard routes:
 
 ```sh
-export APICAST_SELF_MANAGED_STAGING_WILDCARD_DOMAIN=wildcard.saas-staging.$OPENSHIFT_ROUTER_SUFFIX
-export APICAST_SELF_MANAGED_PRODUCTION_WILDCARD_DOMAIN=wildcard.saas-production.$OPENSHIFT_ROUTER_SUFFIX
+export APICAST_SELF_MANAGED_STAGING_WILDCARD_DOMAIN=saas-staging.$OPENSHIFT_ROUTER_SUFFIX
+export APICAST_SELF_MANAGED_PRODUCTION_WILDCARD_DOMAIN=saas-production.$OPENSHIFT_ROUTER_SUFFIX
 ```
 
 - Deploy APIcast instances (in the project of your choice) to be used with 3scale SaaS as self-managed instances:
@@ -181,6 +181,6 @@ oc new-app --template=3scale-gateway --name=apicast-staging -p CONFIGURATION_URL
 oc new-app --template=3scale-gateway --name=apicast-production -p CONFIGURATION_URL_SECRET=3scale-tenant -p CONFIGURATION_CACHE=60 -p RESPONSE_CODES=true -p LOG_LEVEL=info -p CONFIGURATION_LOADER=boot -p APICAST_NAME=apicast-production -p DEPLOYMENT_ENVIRONMENT=production -p IMAGE_NAME=quay.io/3scale/apicast:v3.4.0
 oc scale dc/apicast-staging --replicas=1
 oc scale dc/apicast-production --replicas=1
-oc create route edge apicast-staging --service=apicast-staging --hostname="$APICAST_SELF_MANAGED_STAGING_WILDCARD_DOMAIN" --insecure-policy=Allow --wildcard-policy=Subdomain
-oc create route edge apicast-production --service=apicast-production --hostname="$APICAST_SELF_MANAGED_PRODUCTION_WILDCARD_DOMAIN" --insecure-policy=Allow --wildcard-policy=Subdomain
+oc create route edge apicast-staging --service=apicast-staging --hostname="wildcard.$APICAST_SELF_MANAGED_STAGING_WILDCARD_DOMAIN" --insecure-policy=Allow --wildcard-policy=Subdomain
+oc create route edge apicast-production --service=apicast-production --hostname="wildcard.$APICAST_SELF_MANAGED_PRODUCTION_WILDCARD_DOMAIN" --insecure-policy=Allow --wildcard-policy=Subdomain
 ```
