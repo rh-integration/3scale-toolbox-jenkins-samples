@@ -12,7 +12,7 @@ Use the [provided OpenShift template](setup.yaml) to install the Jenkins pipelin
 
 ```sh
 oc process -f saas-usecase-apikey/setup.yaml \
-           -p SAAS_DEVELOPER_ACCOUNT_ID="$SAAS_DEVELOPER_ACCOUNT_ID" \
+           -p DEVELOPER_ACCOUNT_ID="$SAAS_DEVELOPER_ACCOUNT_ID" \
            -p PRIVATE_BASE_URL="http://$BEER_CATALOG_HOSTNAME" \
            -p NAMESPACE="$TOOLBOX_NAMESPACE" |oc create -f -
 ```
